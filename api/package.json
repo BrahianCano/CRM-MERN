@@ -1,0 +1,31 @@
+{
+  "name": "api-rest-crm-rest",
+  "version": "1.0.0",
+  "description": "API Rest Para CRM para la gestion de clientes, productos y pedidos, hecha con Node JS, Mongo DB , Express",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "Node",
+    "js",
+    "express",
+    "mongo",
+    "db",
+    "rest",
+    "api"
+  ],
+  "author": "Yeisson Osorno",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.16",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-pagination": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
