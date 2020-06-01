@@ -9,7 +9,7 @@ import ListClients from '../components/ListClients';
 
 const ViewClients = (props) => {
 
-    const { result, error, isLoading, ApiFunction } = UseApi('GET', 'http://localhost:3000/clientes', {});
+    const { result, error, isLoading, ApiFunction } = UseApi('GET', 'http://localhost:4000/clientes', {});
     const { history } = props;
 
     useEffect(() => {
