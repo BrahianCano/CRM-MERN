@@ -5,8 +5,9 @@ const app = express();
 
 const Routes = require('./routes/index.routes');
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(function(req, res, next){
 	res.header('Access-Control-Allow-Origin', '*');
 	res.header('Access-Control-Allow-Methods','GET, PUT, POST, DELETE');
