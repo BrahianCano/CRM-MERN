@@ -69,8 +69,8 @@ const FormClient = (props) => {
                 </div>
             </form>
             {
-                error ? <p>Hubo un error => {error}</p> :
-                    result.data ? <p>Datos enviados con exito => {result.data.mensaje}</p> : <Fragment />
+                error ? <p>Hubo un error = {error}</p> :
+                    result.data ? <p>Datos enviados con exito = {result.data.mensaje}</p> : <Fragment />
             }
             <div className="row mt-5">
                 <h3>Visualizacion de registro</h3>

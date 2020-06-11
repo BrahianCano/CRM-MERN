@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import axios from 'axios';
 
 // Importar Auth de Google Firebase //
 import 'firebase/auth'
@@ -24,21 +25,38 @@ const LogInClient = () => {
                })
      }, [])
 
-     
+
      const handleAuthGoogle = async (event) => {
           event.preventDefault();
           const provider = new firebase.auth.GoogleAuthProvider();
           await firebase.auth().signInWithPopup(provider)
-               .then(result => {
+               .then(res => {
                     setUserData({
-                         tokenGoogle: result.user.uid,
-                         email: result.user.email,
-                         image: result.user.photoURL
-                    });
-                    if (result.additionalUserInfo.isNewUser !== false) ApiFunction();
+                         tokenGoogle: res.user.uid,
+                         email: res.user.email,
+                         image: res.user.photoURL
+                    })
+                    try {
+                         const response = axios({
+                              method: 'POST', url: 'http://localhost:4000/usuarios', data: {
+                                   tokenGoogle: res.user.uid,
+                                   email: res.user.email,
+                                   image: res.user.photoURL
+                              }
+                         });
+                         if (response.status !== 200) throw new Error(response.statusText);
+                         console.log('RESPUESTA DE MONGO', response)
+                    } catch (err) {
+                         console.log(err.message);
+                    }
+                    //console.log('RESPUESTA DE LA PROMESA DE GOOGLE ', res)
+                    //console.log('ESTADO DE LA DATA ', userData)
+                    //ApiFunction();
                })
                .catch(err => console.log(err.message));
      }
+
+
 
      const handleSignOutGoogle = async () => {
           await firebase.auth().signOut()
@@ -46,8 +64,8 @@ const LogInClient = () => {
                .catch((error) => console.log('Hubo un error: ' + error))
      }
 
-     if (error) console.log(error);
-     if (result.data) console.log(result.data);
+     //if (error) console.log(error);
+     //if (result) console.log('RESPUESTA DE USEAPI ', result);
 
      return (
           <div className="d-flex justify-content-center text-center">
@@ -62,7 +80,7 @@ const LogInClient = () => {
                                    <h6>Token: {userData.tokenGoogle}</h6>
                               </Fragment>
                          }
-                         <button className="btn btn-lg btn-primary btn-block mt-3" type="submit">Sign in Google</button>
+                         <button className="btn btn-lg btn-primary btn-block mt-3" onClick={handleAuthGoogle} type="submit">Sign in Google</button>
                     </form>
                     <div style={{ width: '280px' }}>
                          <button className="btn btn-lg btn-primary btn-block mt-3" onClick={handleSignOutGoogle} >Sign out</button>
@@ -74,3 +92,5 @@ const LogInClient = () => {
 }
 
 export default LogInClient;
+
+
