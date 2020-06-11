@@ -1,16 +1,16 @@
 import React, { useEffect, Fragment } from 'react';
-import { withRouter } from 'react-router-dom'
+import { withRouter, useHistory } from 'react-router-dom'
 
-// Hooks //
+// Hooks imports //
 import UseApi from '../hooks/UseApi';
 
-// Components //
+// Components imports //
 import ListClients from '../components/ListClients';
 
 
-const ViewClients = (props) => {
+const ViewClients = () => {
     const { result, error, isLoading, ApiFunction } = UseApi('GET', 'http://localhost:4000/clientes', {});
-    const { history } = props;
+    let history = useHistory();
 
 
     // Hook para llamar a la API, y obtener todos los clientes.

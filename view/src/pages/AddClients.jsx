@@ -1,8 +1,11 @@
 import React from 'react';
 
+// Components imports //
 import FormClient from '../components/FormClient';
 
+
 const AddClients = () => {
+
     return (
         <main className="container mt-5">
             <h1>Agregar un cliente</h1>

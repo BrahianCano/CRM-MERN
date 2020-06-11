@@ -1,9 +1,9 @@
 import React, { useState, Fragment, useEffect } from 'react';
 
-// Components //
+// Components imports //
 import ListClients from '../components/ListClients';
 
-// Hooks // 
+// Hooks imports // 
 import UseApi from '../hooks/UseApi';
 
 
@@ -18,7 +18,7 @@ const FormClient = (props) => {
     const { result, error, ApiFunction } = UseApi(props.method, props.uri, { nombre, apellido, empresa, email });
 
 
-    // Evento para enviar la informacion a la base de datos
+    // Funcion para enviar la informacion a la base de datos
     const onSubmit = (event) => {
         event.preventDefault();
         ApiFunction()
