@@ -19,9 +19,14 @@ const LogInClient = () => {
      useEffect(() => {
           if (User)
                setUserData({
-                    tokenGoogle: User.uid,
+                    name: User.additionalUserInfo.profile.name,
                     email: User.email,
-                    image: User.photoURL
+                    picture: User.photoURL,
+                    provider: User.additionalUserInfo.providerId,
+                    verified_email: User.additionalUserInfo.profile.verified_email,
+                    uid: User.user.uid,
+                    access_token: User.credential.accessToken,
+                    
                })
      }, [])
 
@@ -32,16 +37,26 @@ const LogInClient = () => {
           await firebase.auth().signInWithPopup(provider)
                .then(res => {
                     setUserData({
-                         tokenGoogle: res.user.uid,
+                         name: res.additionalUserInfo.profile.name,
                          email: res.user.email,
-                         image: res.user.photoURL
+                         picture: res.user.photoURL,
+                         provider: res.additionalUserInfo.providerId,
+                         verified_email: res.additionalUserInfo.profile.verified_email,
+                         uid: res.user.uid,
+                         access_token: res.credential.accessToken
                     })
+                    console.log(res)
                     try {
                          const response = axios({
                               method: 'POST', url: 'http://localhost:4000/usuarios', data: {
-                                   tokenGoogle: res.user.uid,
+                                   name: res.additionalUserInfo.profile.name,
                                    email: res.user.email,
-                                   image: res.user.photoURL
+                                   picture: res.user.photoURL,
+                                   provider: res.additionalUserInfo.providerId,
+                                   verified_email: res.additionalUserInfo.profile.verified_email,
+                                   uid: res.user.uid,
+                                   access_token: res.credential.accessToken
+                                   
                               }
                          });
                          if (response.status !== 200) throw new Error(response.statusText);

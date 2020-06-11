@@ -4,9 +4,14 @@ let schema = mongoose.Schema;
 
 const userSchema = schema({
 
-    tokenGoogle: String,
+    name : String,
     email : String,
-    image : String
+    picture : String,
+    provider : String,
+    verified_email : Boolean,
+    uid : String,
+    access_token : String
+
 });
 
 module.exports = mongoose.model('users', userSchema);
