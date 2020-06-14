@@ -26,7 +26,7 @@ const ViewClients = () => {
 
     return (
         <main className="container mt-5">
-            <h1>Listado de clientes</h1>
+            <h1>Listado de clientes de mongo</h1>
 
             {!error ?
                 <Fragment >
